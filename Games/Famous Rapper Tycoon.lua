@@ -1,7 +1,7 @@
 -- https://www.roblox.com/games/11596351062/prove-mom-wrong-by-being-a-famous-rapper-tycoon
 util = loadstring(game:HttpGet('https://raw.githubusercontent.com/brownfieldd00/unwrapper/main/source.lua'))()
 if getgenv()['11596351062'] then getgenv()['11596351062'].stop() end
-util:loadUiLibrary()
+util:loadUiLibrary(); util:setAntiAFK(false);
 local Tycoons = util:Get('Workspace').Tycoons
 local NPCs = util:Get('Workspace').NPCS
 local function getClientTycoon()
@@ -59,7 +59,10 @@ local AutoInteract = MainTab:AddSwitch('Auto interact with worker', function(sta
     Settings:set('auto_interact', state)
     return true 
 end)
-
+local AntiAFK = MainTab:AddSwitch('Anti AFK', function(state)
+    util:setAntiAFK(state)
+    util:notify('Anti AFK: ' .. tostring(state))
+end)
 getgenv()['11596351062'] = set
 localScript = coroutine.wrap(function()
     local long = 0
