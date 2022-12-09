@@ -22,9 +22,19 @@ local function getNPCs()
     end
     return list
 end
+local function interactWorkers()
+    local tycoon = getClientTycoon()
+    local items = tycoon.Items:GetDescendants()
+    for i, item in pairs(items) do
+        if item:IsA('ProximityPrompt') then
+            fireproximityprompt(item)
+        end
+    end
+    return true
+end
 Game, Settings = util:loadModule('Game'), util:loadModule('Settings')
 local CDs = util:Get('ReplicatedStorage').Events.CDs
-Settings:default({'auto_record', 'auto_sell', 'auto_collect'})
+Settings:default({'auto_record', 'auto_sell', 'auto_collect', 'auto_interact'})
 local set = {}
 local run = true
 function set.stop()
@@ -43,6 +53,10 @@ local AutoSell = MainTab:AddSwitch('Auto sell CDS', function(state)
 end)
 local AutoCollect = MainTab:AddSwitch('Auto collect CDS', function(state)
     Settings:set('auto_collect', state)
+    return true 
+end)
+local AutoInteract = MainTab:AddSwitch('Auto interact with worker', function(state)
+    Settings:set('auto_interact', state)
     return true 
 end)
 
@@ -66,6 +80,9 @@ localScript = coroutine.wrap(function()
                     fireproximityprompt(v, math.random(1, 8))
                 end
             end
+        end
+        if Settings:get('auto_interact') and cycle == 100 then
+            interactWorkers()
         end
         if cycle >= 100 then cycle = 0 end
         if long >= 1000 then long = 0 end
