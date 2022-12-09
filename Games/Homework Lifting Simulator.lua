@@ -1,0 +1,6 @@
+game:GetService('RunService').RenderStepped:Connect(function()
+    pcall(function()
+       game.Players.LocalPlayer.Character.Weights.E:FireServer()
+       game.Players.LocalPlayer.Character.Weights.E:FireServer()
+    end) 
+end)
