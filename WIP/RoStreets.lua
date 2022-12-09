@@ -14,27 +14,10 @@ local function CheckCash()
     end
     return FoundCash
 end
-local function getATMs()
-    for i, v in pairs(workspace.Cash_Givers:GetChildren()) do
-        if v:IsA('Model') and v.Name == 'Atm' and v:FindFirstChild('Health').Value > 0 and v:FindFirstChild('Screen') then
-            util:teleportToLocationPatchA(v.Open.CFrame + Vector3.new(0, 10, 0), 0.1)
-            Player.Character.Humanoid:MoveTo(v:FindFirstChild('Screen').Position)
-            Player.Character.HumanoidRootPart.CFrame = CFrame.lookAt(Player.Character.HumanoidRootPart.Position, v:FindFirstChild('Screen').Position)
-            task.wait(1)
-            Player.Character.HumanoidRootPart.Anchored = true
-            repeat task.wait() 
-                mouse1click()
-            until v:FindFirstChild('Health').Value <= 0 
-            repeat task.wait()
-                CheckCash()
-            until not CheckCash() or not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart")
-        end
-    end
+Melee.Parent = Player.Character
+local function hit()
+    util:spoof(Player:GetMouse().Button1Down, {x = 0, y = 0})
+    task.wait(.1)
     return true
 end
-Melee.Parent = Player.Character
-
-while true do
-    task.wait()
-    getATMs()
-end
+--TODO: autofarm lol
