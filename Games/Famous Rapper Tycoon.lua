@@ -68,6 +68,6 @@ localScript = coroutine.wrap(function()
             end
         end
         if cycle >= 100 then cycle = 0 end
-		if long >= 1000 then long = 0 end
+        if long >= 1000 then long = 0 end
     end
 end)()
