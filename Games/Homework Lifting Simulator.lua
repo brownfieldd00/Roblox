@@ -2,8 +2,5 @@
 util = loadstring(game:HttpGet('https://raw.githubusercontent.com/brownfieldd00/unwrapper/main/source.lua'))()
 
 game:GetService('RunService').RenderStepped:Connect(function()
-    local found = util:getLocalPlayer().Character:FindFirstChild('Weights') or nil
-    if found then
-        util:fire(found)
-    end
+    util:executeNow(function() game:GetService('Players').LocalPlayer.Character.Weights.E:FireServer() end)
 end)
