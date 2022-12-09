@@ -12,6 +12,7 @@ function module:setState(bool_state)
         if not module.connection then return end
         module.connection:Disconnect()
     end
+    return true
 end
 module:setState(module.defaultState)
 return module
