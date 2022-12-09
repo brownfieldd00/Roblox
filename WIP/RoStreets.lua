@@ -14,17 +14,27 @@ local function CheckCash()
     end
     return FoundCash
 end
-
-Melee.Parent = Player.Character 
-
-for Data, Model in pairs(game:GetService("Workspace")["Cash_Givers"]:GetChildren()) do 
-    if Model:IsA("Model") and Model.Name == "Atm" and Model:FindFirstChild("Health") and not tostring(Model:FindFirstChild("Health").Value):match("-") then 
-        util:teleportToLocationPatchA(Model.Open.CFrame + Vector3.new(0, 0, 5))
-        repeat task.wait() 
-            mouse1click()
-        until tostring(Model:FindFirstChild("Health").Value):match("-")
-        repeat task.wait()
-            CheckCash()
-        until not CheckCash() or not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart")
+local function getATMs()
+    for i, v in pairs(workspace.Cash_Givers:GetChildren()) do
+        if v:IsA('Model') and v.Name == 'Atm' and v:FindFirstChild('Health').Value > 0 and v:FindFirstChild('Screen') then
+            util:teleportToLocationPatchA(v.Open.CFrame + Vector3.new(0, 10, 0), 0.1)
+            Player.Character.Humanoid:MoveTo(v:FindFirstChild('Screen').Position)
+            Player.Character.HumanoidRootPart.CFrame = CFrame.lookAt(Player.Character.HumanoidRootPart.Position, v:FindFirstChild('Screen').Position)
+            task.wait(1)
+            Player.Character.HumanoidRootPart.Anchored = true
+            repeat task.wait() 
+                mouse1click()
+            until v:FindFirstChild('Health').Value <= 0 
+            repeat task.wait()
+                CheckCash()
+            until not CheckCash() or not Player.Character or not Player.Character:FindFirstChild("HumanoidRootPart")
+        end
     end
-end 
+    return true
+end
+Melee.Parent = Player.Character
+
+while true do
+    task.wait()
+    getATMs()
+end
