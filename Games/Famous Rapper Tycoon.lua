@@ -1,13 +1,13 @@
 -- https://www.roblox.com/games/11596351062/prove-mom-wrong-by-being-a-famous-rapper-tycoon
-util = loadstring(game:HttpGet('https://raw.githubusercontent.com/brownfieldd00/unwrapper/main/source.lua'))()
+core = loadstring(game:HttpGet('https://raw.githubusercontent.com/brownfieldd00/core/main/core.lua'))()
+core:gModule('UiLibrary'); local antiAfk = core:gModule('AntiAfk');
 if getgenv()['11596351062'] then getgenv()['11596351062'].stop() end
-util:loadUiLibrary(); util:setAntiAFK(false);
-local Tycoons = util:Get('Workspace').Tycoons
-local NPCs = util:Get('Workspace').NPCS
+local Tycoons = workspace.Tycoons
+local NPCs = workspace.NPCS
 local function getClientTycoon()
     for i, v in pairs(Tycoons:GetChildren()) do
         if v:FindFirstChild('TycoonOwner') then
-            if v:FindFirstChild('TycoonOwner').Value == util:getLocalPlayer().Name then
+            if v:FindFirstChild('TycoonOwner').Value == core:gPlayer().Name then
                 return v
             end
         end
@@ -32,8 +32,8 @@ local function interactWorkers()
     end
     return true
 end
-Game, Settings = util:loadModule('Game'), util:loadModule('Settings')
-local CDs = util:Get('ReplicatedStorage').Events.CDs
+Game, Settings = core:gModule('Game'), core:gModule('Settings')
+local CDs = game:GetService('ReplicatedStorage').Events.CDs
 Settings:default({'auto_record', 'auto_sell', 'auto_collect', 'auto_interact'})
 local set = {}
 local run = true
@@ -60,8 +60,8 @@ local AutoInteract = MainTab:AddSwitch('Auto interact with worker', function(sta
     return true 
 end)
 local AntiAFK = MainTab:AddSwitch('Anti AFK', function(state)
-    util:setAntiAFK(state)
-    util:notify('Anti AFK: ' .. tostring(state))
+    antiAfk:setAntiAFK(state)
+    core:notify('Anti AFK: ' .. tostring(state))
 end)
 getgenv()['11596351062'] = set
 localScript = coroutine.wrap(function()
@@ -70,7 +70,7 @@ localScript = coroutine.wrap(function()
     while run == true do
         task.wait(); cycle = cycle + 1; long = long + 1;
         if Settings:get('auto_record') == true and cycle == 1 then 
-            util:fire(CDs, util:getLocalPlayer())
+            CDs:FireServer(core:gPlayer())
         end
         if Settings:get('auto_sell') == true and cycle == 50 then
             for i, v in pairs(getNPCs()) do
