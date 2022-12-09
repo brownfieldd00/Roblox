@@ -1,7 +1,9 @@
 -- https://www.roblox.com/games/4840156698/Pets-Homework-Lifting-Simulator
+util = loadstring(game:HttpGet('https://raw.githubusercontent.com/brownfieldd00/unwrapper/main/source.lua'))()
+
 game:GetService('RunService').RenderStepped:Connect(function()
-    pcall(function()
-       game.Players.LocalPlayer.Character.Weights.E:FireServer()
-       game.Players.LocalPlayer.Character.Weights.E:FireServer()
-    end) 
+    local found = util:getLocalCharacter():FindFirstChild('Weights') or nil
+    if found then
+        util:fire(found)
+    end
 end)
