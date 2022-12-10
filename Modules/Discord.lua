@@ -13,7 +13,7 @@ function module:Check()
 		error("ERROR | No webhook specified.")
 	else
 		warn("SYSTEM | Sent a message to channel. If no message is sent, check your URL or use a proxy service.")
-		HTTPService:PostAsync(Webhook,
+		HTTPService:PostAsync(self.Webhook,
 			HTTPService:JSONEncode({
 				content = "If you see this message, this means that your webhook is configured properly."
 			}))	
