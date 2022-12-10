@@ -1,16 +1,15 @@
 -- Credits to: kotel2005 https://www.roblox.com/users/488603002/profile for this module
 local module = {}
-
+module.Webhook = ''
 local HTTPService = game:GetService("HttpService")
 
-local Webhook = nil
-
-function module.SetWebhook(WebhookURL)
-	Webhook = WebhookURL
+function module:SetWebhook(WebhookURL)
+	self.Webhook = WebhookURL
+    return
 end
 
-function module.Check()
-	if Webhook == nil then
+function module:Check()
+	if self.Webhook == nil then
 		error("ERROR | No webhook specified.")
 	else
 		warn("SYSTEM | Sent a message to channel. If no message is sent, check your URL or use a proxy service.")
@@ -21,18 +20,15 @@ function module.Check()
 	end
 end
 
-function module.Send(Message)
-	if Webhook == nil then
+function module:Send(Message)
+	if self.Webhook == nil then
 		error("ERROR | No webhook specified.")
 	end
-	HTTPService:PostAsync(Webhook,
-		HTTPService:JSONEncode({
-			content = Message
-		}))
+	HTTPService:PostAsync(self.Webhook, HTTPService:JSONEncode({content = Message}))
 end
 
-function module.Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
-	if Webhook == nil then
+function module:Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
+	if self.Webhook == nil then
 		error("ERROR | No webhook specified.")
 		return
 	end
@@ -60,7 +56,7 @@ function module.Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
 			}}
 		})
 	
-	HTTPService:PostAsync(Webhook, data)
+	HTTPService:PostAsync(self.Webhook, data)
 end
 
 return module
