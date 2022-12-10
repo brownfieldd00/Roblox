@@ -1,7 +1,8 @@
 -- https://www.roblox.com/games/11596351062/prove-mom-wrong-by-being-a-famous-rapper-tycoon
 core = loadstring(game:HttpGet('https://raw.githubusercontent.com/brownfieldd00/core/main/core.lua'))()
-core:gModule('UiLibrary'); local antiAfk = core:gModule('AntiAfk');
-if getgenv()['11596351062'] then getgenv()['11596351062'].stop() end
+core:gModule('UiLibrary'); local antiAfk = core:gModule('AntiAfk'); 
+core:stopRunningInstance(); core:registerSession();
+
 local Tycoons = workspace.Tycoons
 local NPCs = workspace.NPCS
 local function getClientTycoon()
@@ -35,12 +36,6 @@ end
 Game, Settings = core:gModule('Game'), core:gModule('Settings')
 local CDs = game:GetService('ReplicatedStorage').Events.CDs
 Settings:default({'auto_record', 'auto_sell', 'auto_collect', 'auto_interact'})
-local set = {}
-local run = true
-function set.stop()
-    run = false
-end
-
 local MainWindow = library:AddWindow('Famous Rapper Tycoon GUI - github.com/brownfieldd00')
 local MainTab = MainWindow:AddTab('Auto Settings')
 local AutoCD = MainTab:AddSwitch('Auto record CDS', function(state)
@@ -63,7 +58,6 @@ local AntiAFK = MainTab:AddSwitch('Anti AFK', function(state)
     antiAfk:setAntiAFK(state)
     core:notify('Anti AFK: ' .. tostring(state))
 end)
-getgenv()['11596351062'] = set
 localScript = coroutine.wrap(function()
     local long = 0
     local cycle = 0
