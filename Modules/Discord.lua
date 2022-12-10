@@ -5,7 +5,7 @@ local HTTPService = game:GetService("HttpService")
 
 function module:SetWebhook(WebhookURL)
 	self.Webhook = WebhookURL
-    return
+	return
 end
 
 function module:Check()
@@ -44,7 +44,7 @@ function module:Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
 	if EmbedHexColorCode == nil or EmbedHexColorCode == "" then
 		EmbedHexColorCode = tonumber(0xffffff)
 	end
-	
+
 	local data = HTTPService:JSONEncode(
 		{
 			["content"] = Message,
@@ -55,7 +55,7 @@ function module:Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
 				["color"] = EmbedHexColorCode,
 			}}
 		})
-	
+
 	HTTPService:PostAsync(self.Webhook, data)
 end
 Discord = module
