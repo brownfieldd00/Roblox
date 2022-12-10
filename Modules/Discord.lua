@@ -58,5 +58,6 @@ function module:Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
 	
 	HTTPService:PostAsync(self.Webhook, data)
 end
-
+Discord = module
+Discord.__index = Discord
 return module
