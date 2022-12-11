@@ -2,7 +2,7 @@ Synapse = {}
 Synapse.__index = Synapse
 
 function Synapse:checkExploit()
-    if not fireproximityprompt or not firesignal then 
+    if not fireproximityprompt or not firesignal then
         core:gPlayer():Kick('Unsupported exploit.')
         return false
     else
