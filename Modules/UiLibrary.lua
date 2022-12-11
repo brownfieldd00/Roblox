@@ -10,7 +10,7 @@ local ui_options = {
 	toggle_key = Enum.KeyCode.RightShift,
 	can_resize = true,
 }
-
+local highlight_logs;
 do
 	local imgui = game:GetService("CoreGui"):FindFirstChild("imgui")
 	if imgui then imgui:Destroy() end
@@ -1776,8 +1776,8 @@ function library:AddWindow(title, options)
 							        elseif quote == true and c == "]" then
 							            quote = false
 							        end
-							        if quote == false and c == "\]" then
-							            highlight = highlight .. "\]"
+							        if quote == false and c == "]" then
+							            highlight = highlight .. "]"
 							        elseif c == "\n" then
 							            highlight = highlight .. "\n"
 									elseif c == "\t" then
@@ -1858,7 +1858,7 @@ function library:AddWindow(title, options)
 									sf.CanvasSize = UDim2.new(0, 0, lin * 0.153846154, 0)
 								end
 
-							local highlight_logs = function(type)
+							highlight_logs = function(type)
 							end
 								if type == "Text" then
 									Source.Text = Source.Text:gsub("\13", "")

@@ -1,4 +1,5 @@
 local module = {}
+core = core or {}
 module.defaultState = false
 function module.idled()
     game:GetService("VirtualUser"):ClickButton2(Vector2.new())

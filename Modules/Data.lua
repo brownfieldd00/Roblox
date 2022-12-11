@@ -1,4 +1,7 @@
 local Data = {}
+getgc = getgc or function()
+    return {}
+end
 Data.cache = getgc(true)
 Data.tables = {}
 for i, v in pairs(Data.cache) do
