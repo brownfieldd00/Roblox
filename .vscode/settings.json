@@ -12,6 +12,7 @@
         "make_writeable",
         "decompile",
         "getnamecallmethod",
-        "syn"
+        "syn",
+        "getinstances"
     ]
 }
