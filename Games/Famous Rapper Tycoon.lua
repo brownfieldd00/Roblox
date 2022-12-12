@@ -1,7 +1,7 @@
 -- https://www.roblox.com/games/11596351062/prove-mom-wrong-by-being-a-famous-rapper-tycoon
 core = loadstring(game:HttpGet('https://raw.githubusercontent.com/brownfieldd00/core/main/core.lua'))()
 core:gModule('UiLibrary'); local antiAfk = core:gModule('AntiAfk'); 
-core:stopRunningInstance(); core:registerSession();
+core:stopRunningInstance(); core:registerSession(); Synapse:checkExploit()
 -- Compatibility
 library = library or {}
 fireproximityprompt = fireproximityprompt or function()
