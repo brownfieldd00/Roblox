@@ -10,4 +10,24 @@ function Synapse:checkExploit()
     end
 end
 
+function Synapse:request(url)
+    local request = {}
+    request.url = url
+    function request:setMethod(m)
+        self.method = m
+    end
+    function request:setHeader(name, value)
+        rawset(self.headers, name, value)
+    end
+    function request:send()
+        local data = syn.request({
+            Url = self.url,
+            Method = self.method,
+            Headers = self.headers
+        })
+        return data.Body or ''
+    end
+    return request
+end
+
 return Synapse
