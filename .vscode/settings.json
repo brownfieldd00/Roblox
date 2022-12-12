@@ -2,6 +2,15 @@
     "robloxLsp.diagnostics.globals": [
         "firesignal",
         "fireproximityprompt",
-        "core"
+        "core",
+        "Clipboard",
+        "Clipboard",
+        "Synapse",
+        "setclipboard",
+        "getrawmetatable",
+        "setreadonly",
+        "make_writeable",
+        "decompile",
+        "getnamecallmethod"
     ]
 }
