@@ -904,7 +904,7 @@ end
 local fix = function(string)
 if string == "/e fix" then
 show()
-wait(0.3)
+task.wait(0.3)
 pos_frame(BG, UDim2.new(0.1, 0, 0.1, 0))
 end
 end
