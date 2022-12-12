@@ -11,6 +11,7 @@
         "setreadonly",
         "make_writeable",
         "decompile",
-        "getnamecallmethod"
+        "getnamecallmethod",
+        "syn"
     ]
 }
