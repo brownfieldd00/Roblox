@@ -14,5 +14,8 @@
         "getnamecallmethod",
         "syn",
         "getinstances"
+    ],
+    "robloxLsp.diagnostics.disable": [
+        "undefined-global"
     ]
 }

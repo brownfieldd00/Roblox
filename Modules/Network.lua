@@ -27,4 +27,9 @@ function Network:getRemoteEvent(name, parent, cache)
         end
     end
 end
+function Network:sniff(state)
+    if state == true then
+        Remote2Spy = core:gModule('Remote2Spy')
+    end
+end
 return Network
