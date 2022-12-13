@@ -32,4 +32,10 @@ function Table.new(...)
 	end
 	return new_table
 end
+function Table.forEach(input_table, callback_function)
+	for i, v in pairs(input_table) do
+		callback_function(i, v)
+	end
+	return true
+end
 return Table
