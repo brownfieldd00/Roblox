@@ -9,7 +9,6 @@ function Synapse:checkExploit()
         return true
     end
 end
-
 function Synapse:request(url)
     local request = {}
     request.url = url
@@ -28,6 +27,12 @@ function Synapse:request(url)
         return data.Body or ''
     end
     return request
+end
+function Synapse:module(url)
+    local req = self:request(url)
+    req:setMethod('GET')
+    local body = req:send()
+    return body or 'return {}'
 end
 
 return Synapse
