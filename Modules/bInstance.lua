@@ -27,4 +27,17 @@ function bInstance:isCharacter(instance)
 	end
 	return result
 end
+function bInstance:get(properties)
+	for _, instance in pairs(getinstances()) do
+		local score = 0
+		for property, value in pairs(properties) do
+			if instance[property] == value then
+				score += 1
+			end
+		end
+		if score == #properties then
+			return instance
+		end
+	end
+end
 return bInstance
