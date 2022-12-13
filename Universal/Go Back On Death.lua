@@ -10,18 +10,30 @@ localScript = coroutine.wrap(function()
     local switch = tab:AddSwitch('Go back on death', function(state)
         should = state
     end)
+    local should_anchor = false
+    local should_tween = false
+    local anchorSwitch = tab:AddSwitch('Anchor after teleport', function(state)
+        should_anchor = state
+    end)
+    local tweenSwitch = tab:AddSwitch('Use Tween (bypass some ACs)', function(state)
+        should_tween = state
+    end)
     local player = core:gPlayer()
     local last = player.Character.HumanoidRootPart.CFrame
     local event = player.CharacterAdded:Connect(function(char)
         if should then
-            -- char:WaitForChild('HumanoidRootPart').CFrame = last
-            -- temporary fix. might revert.
-            core:cTween(char:WaitForChild('HumanoidRootPart'), {
-                CFrame = last
-            }, 2)
-            char:WaitForChild('HumanoidRootPart').Anchored = true
-            task.wait(4)
-            char:WaitForChild('HumanoidRootPart').Anchored = false
+            if should_tween then
+                core:cTween(char:WaitForChild('HumanoidRootPart'), {
+                    CFrame = last
+                }, 2)
+            else
+                char:WaitForChild('HumanoidRootPart').CFrame = last
+            end
+            if should_anchor then
+                char:WaitForChild('HumanoidRootPart').Anchored = true
+                task.wait(4)
+                char:WaitForChild('HumanoidRootPart').Anchored = false
+            end
         end
     end)
     while run do
