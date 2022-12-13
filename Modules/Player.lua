@@ -55,4 +55,12 @@ function Player:teleportToCFrame(input_cframe)
 	self:getHumanoidRootPart().CFrame = input_cframe
 	return true
 end
+function Player:findPlayerFromName(input_string)
+	for i, player in pairs(self.Players:GetPlayers()) do
+		if player.Name:lower():sub(1, #input_string) == input_string:lower() then
+			return player
+		end
+	end
+	return nil
+end
 return Player
