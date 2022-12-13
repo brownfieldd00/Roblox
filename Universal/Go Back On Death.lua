@@ -3,6 +3,7 @@ core:gModule('UiLibrary'); core:stopRunningInstance(); core:registerSession();
 library = library or {}
 library.__index = library
 run = run or true
+dead = false
 localScript = coroutine.wrap(function()
     local should = false
     local window = library:AddWindow('Go Back On Death GUI | github.com/brownfieldd00')
@@ -21,25 +22,31 @@ localScript = coroutine.wrap(function()
     local player = core:gPlayer()
     local last = player.Character.HumanoidRootPart.CFrame
     local event = player.CharacterAdded:Connect(function(char)
+        local Humanoid = char:WaitForChild('Humanoid')
+        local HRP = char:WaitForChild('HumanoidRootPart')
+        dead = false
+        Humanoid.Died:Connect(function()
+            dead = true
+        end)
         if should then
             if should_tween then
-                core:cTween(char:WaitForChild('HumanoidRootPart'), {
+                core:cTween(HRP, {
                     CFrame = last
                 }, 2)
             else
-                char:WaitForChild('HumanoidRootPart').CFrame = last
+                HRP.CFrame = last
             end
             if should_anchor then
-                char:WaitForChild('HumanoidRootPart').Anchored = true
+                HRP.Anchored = true
                 task.wait(4)
-                char:WaitForChild('HumanoidRootPart').Anchored = false
+                HRP.Anchored = false
             end
         end
     end)
     while run do
         task.wait(.5)
         local hrp = player.Character:FindFirstChild('HumanoidRootPart')
-        if hrp then
+        if hrp and not dead then
             last = hrp.CFrame
         end
     end
