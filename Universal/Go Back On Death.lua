@@ -16,11 +16,11 @@ localScript = coroutine.wrap(function()
         if should then
             -- char:WaitForChild('HumanoidRootPart').CFrame = last
             -- temporary fix. might revert.
-            char:WaitForChild('HumanoidRootPart').Anchored = true
             core:cTween(char:WaitForChild('HumanoidRootPart'), {
                 CFrame = last
             }, 2)
-            task.wait(2)
+            char:WaitForChild('HumanoidRootPart').Anchored = true
+            task.wait(4)
             char:WaitForChild('HumanoidRootPart').Anchored = false
         end
     end)
