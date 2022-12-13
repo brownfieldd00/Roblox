@@ -14,7 +14,11 @@ localScript = coroutine.wrap(function()
     local last = player.Character.HumanoidRootPart.CFrame
     local event = player.CharacterAdded:Connect(function(char)
         if should then
-            char:WaitForChild('HumanoidRootPart').CFrame = last
+            -- char:WaitForChild('HumanoidRootPart').CFrame = last
+            -- temporary fix. might revert.
+            core:cTween(char:WaitForChild('HumanoidRootPart'), {
+                CFrame = last
+            }, 2)
         end
     end)
     while run do
