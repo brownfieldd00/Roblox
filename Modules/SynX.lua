@@ -34,5 +34,10 @@ function Synapse:module(url)
     local body = req:send()
     return body or 'return {}'
 end
+function Synapse:fromGitHub(url)
+    local url = ('https://raw.githubusercontent.com/%s'):format(url)
+    local data = self:module(url)
+    return data
+end
 
 return Synapse
