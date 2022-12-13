@@ -1,14 +1,15 @@
 -- Credits to: kotel2005 https://www.roblox.com/users/488603002/profile for this module
-local module = {}
-module.Webhook = ''
+-- Revamped by me tho lol
+local Discord = {}
+Discord.Webhook = {}
 local HTTPService = game:GetService("HttpService")
-
-function module:SetWebhook(WebhookURL)
+local webhook = Discord.Webhook
+webhook.Webhook = ''
+function webhook:SetWebhook(WebhookURL)
 	self.Webhook = WebhookURL
 	return
 end
-
-function module:Check()
+function webhook:Check()
 	if self.Webhook == nil then
 		error("ERROR | No webhook specified.")
 	else
@@ -19,15 +20,13 @@ function module:Check()
 			}))	
 	end
 end
-
-function module:Send(Message)
+function webhook:Send(Message)
 	if self.Webhook == nil then
 		error("ERROR | No webhook specified.")
 	end
 	HTTPService:PostAsync(self.Webhook, HTTPService:JSONEncode({content = Message}))
 end
-
-function module:Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
+function webhook:Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
 	if self.Webhook == nil then
 		error("ERROR | No webhook specified.")
 		return
@@ -58,6 +57,9 @@ function module:Embed(Message, EmbedTitle, EmbedDescription, EmbedHexColorCode)
 
 	HTTPService:PostAsync(self.Webhook, data)
 end
-Discord = module
+function Discord:getTag()
+	return 'KXWISH#7254'
+end
 Discord.__index = Discord
-return module
+module.__index = module
+return Discord
