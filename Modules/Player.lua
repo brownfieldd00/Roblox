@@ -63,4 +63,15 @@ function Player:findPlayerFromName(input_string)
 	end
 	return nil
 end
+function Player:leaveManually()
+	local VIM = game:GetService("VirtualInputManager")
+    VIM:SendKeyEvent(true, Enum.KeyCode.Escape, false, nil)
+    task.wait(.1)
+    VIM:SendKeyEvent(true, Enum.KeyCode.L, false, nil)
+    task.wait(.1)
+    VIM:SendKeyEvent(true, Enum.KeyCode.Return, false, nil)
+end
+function Player:leave()
+	return game:Shutdown()
+end
 return Player
