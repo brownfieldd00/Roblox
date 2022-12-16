@@ -19,6 +19,7 @@ function Whitelist:get()
     })
     local handshake = loadstring(res.Body)()
     if not handshake then
+        data = nil
         return false
     end
     return loadstring(data.Body)()
