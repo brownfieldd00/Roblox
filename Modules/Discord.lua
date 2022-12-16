@@ -17,7 +17,7 @@ function webhook:Check()
 		HTTPService:PostAsync(self.Webhook,
 			HTTPService:JSONEncode({
 				content = "If you see this message, this means that your webhook is configured properly."
-			}))	
+			}))
 	end
 end
 function webhook:Send(Message)
