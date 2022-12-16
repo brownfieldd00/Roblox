@@ -4,9 +4,6 @@ local Whitelist = setmetatable({}, {
     end,
     __tostring = function()
         return 'Whitelist'
-    end,
-    __metamethod = function()
-        return 'Whitelist'
     end
 })
 if not core then return {error('no thanks')} end
