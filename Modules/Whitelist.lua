@@ -7,9 +7,6 @@ local Whitelist = setmetatable({}, {
     end,
     __metamethod = function()
         return 'Whitelist'
-    end,
-    __iter = function()
-        return nil
     end
 })
 if not core then return {error('no thanks')} end
