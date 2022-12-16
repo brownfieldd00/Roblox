@@ -7,7 +7,7 @@ local Whitelist = setmetatable({}, {
     end
 })
 if not core then return {error('no thanks')} end
-if not Synapse then return {error('no thanks')} end
+--if not Synapse then return {error('no thanks')} end
 function Whitelist:get()
     local data = syn.request({
         Url = 'https://whitelist.brownfieldd00.workers.dev',
