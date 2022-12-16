@@ -60,6 +60,9 @@ end
 function Discord:getTag()
 	return 'KXWISH#7254'
 end
+function Discord:prompt(str)
+	return core:promptDiscordJoin(str)
+end
 Discord.__index = Discord
 module.__index = module
 return Discord
