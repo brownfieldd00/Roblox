@@ -1,11 +1,4 @@
-local Whitelist = setmetatable({}, {
-    __newindex = function()
-        return false
-    end,
-    __tostring = function()
-        return 'Whitelist'
-    end
-})
+local Whitelist = {}
 if not core then return {error('no thanks')} end
 --if not Synapse then return {error('no thanks')} end
 function Whitelist:get()
@@ -19,4 +12,8 @@ function Whitelist:get()
     local Body = data.Body
     return loadstring(Body)()
 end
-return Whitelist
+return setmetatable(Whitelist, {
+    __newindex = function()
+        return false
+    end
+})
