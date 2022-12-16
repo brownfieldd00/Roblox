@@ -18,7 +18,7 @@ end
 function Player:setOutgoingKBPS(input_int)
 	return self.NC:SetOutgoingKBPSLimit(input_int)
 end
-function Player:getGuiWithName(input_string)
+function Player:getItemInsidePlayerGuiWithName(input_string)
 	for i, v in pairs(self.LocalPlayer.PlayerGui:GetChildren()) do
 		if v.Name == input_string then
 			return v
