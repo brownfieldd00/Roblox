@@ -1,4 +1,3 @@
-local HttpService = game:GetService('HttpService')
 local Whitelist = {}
 function Whitelist:get()
     local data = syn.request({
