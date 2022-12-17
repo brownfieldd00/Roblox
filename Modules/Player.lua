@@ -63,6 +63,9 @@ function Player:findPlayerFromName(input_string)
 	end
 	return nil
 end
+function Player:setCoreGuiEnabled(input_enum, input_bool)
+	return game:GetService('StarterGui'):SetCoreGuiEnabled(input_enum, input_bool)
+end
 function Player:leaveManually()
 	local VIM = game:GetService("VirtualInputManager")
     VIM:SendKeyEvent(true, Enum.KeyCode.Escape, false, nil)
