@@ -14,6 +14,7 @@ while run do
         firetouchinterest(f, t, 0)
         task.wait(.1)
         firetouchinterest(f, t, 1)
+    else
+        task.wait(1)
     end
-    task.wait(1)
 end
