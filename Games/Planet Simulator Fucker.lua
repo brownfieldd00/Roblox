@@ -14,9 +14,11 @@ function get()
         local masstarget = massobject:FindFirstChild(k)
         if not masstarget then continue end
         if not masstarget:FindFirstChild('Hitbox') then continue end
-        firetouchinterest(f, masstarget:FindFirstChild('Hitbox'), 0)
-        task.wait(.1)
-        firetouchinterest(f, masstarget:FindFirstChild('Hitbox'), 1)
+        pcall(function()
+            firetouchinterest(f, masstarget:FindFirstChild('Hitbox'), 0)
+            task.wait(.1)
+            firetouchinterest(f, masstarget:FindFirstChild('Hitbox'), 1)
+        end)
         task.wait(.1)
     end
 end
