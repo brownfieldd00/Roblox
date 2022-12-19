@@ -69,5 +69,22 @@ function instance.new(classname_string)
 	Inst.Name = Inst._instance.Name
 	return setmetatable(Inst, self)
 end
-
+function instance.hook(inst_instance)
+	local meta = {}
+	meta.__index = inst_instance
+	meta.__newindex = function(self, key_string, value_any)
+		inst_instance[key_string] = value_any
+		return true
+	end
+	meta.__len = function()
+		return 0
+	end
+	meta.__metatable = false
+	local proxy = newproxy(true)
+	local proxy_meta = getmetatable(proxy)
+	for i, v in pairs(meta) do
+		proxy_meta[i] = v
+	end
+	return proxy
+end
 return instance
