@@ -61,7 +61,11 @@ function instance.new(classname_string)
 			self._instance.Size = position_udim2
 		end
 	end
-	
+	function Inst:SetTransparency(transparency_number)
+		if transparency_number and self._instance:IsA('GuiObject') then
+			self._instance.Transparency = transparency_number
+		end
+	end
 	Inst.Name = Inst._instance.Name
 	return setmetatable(Inst, self)
 end
