@@ -1,43 +1,56 @@
-local bInstance = {}
+local instance = {}
 
-function bInstance.new(class, parent, properties)
-	local properties = properties or {Name = class}
-	local instance = Instance.new(class)
-	if parent then instance.Parent = parent end
-	for property_name, property_value in ipairs(properties) do
-		local applySuccess, r = pcall(function()
-			instance[property_name] = property_value
-			return true
+function instance.new(classname_string)
+	local proxy = newproxy(true)
+	local self = getmetatable(proxy)
+	local Inst = {}
+	Inst._instance = Instance.new(classname_string)
+	Inst.ClassName = classname_string
+	self.__index = Inst._instance
+	self.__metatable = false
+	
+	
+	self.__newindex = function(self0, key, value)
+		if self0._instance[key] then
+			return self0._instance[key]
+		else
+			return nil
+		end
+	end
+	-- Custom Instance Methods
+	function Inst:Anchor()
+		pcall(function()
+			if self._instance.Anchored then
+				self._instance.Anchored = true
+			end
 		end)
 	end
-	return instance
-end
-function bInstance:isA(typeof_string, anything)
-	return (typeof(anything) == typeof_string)
-end
-function bInstance:isCharacter(instance)
-	local result = false
-	for i, player in pairs(game:GetService('Players'):GetPlayers()) do
-		if player and player.Character then
-			if instance:IsDescendantOf(player.Character) then
-				result = true
-				break
+	function Inst:UnAnchor()
+		pcall(function()
+			if self._instance.Anchored then
+				self._instance.Anchored = false
+			end
+		end)
+	end
+	function Inst:SetName(name_string)
+		if name_string then
+			self._instance.Name = name_string
+		end
+	end
+	function Inst:SetPosition(position_vector3)
+		if position_vector3 then
+			if self._instance:IsA('BasePart') then
+				self._instance.Position = position_vector3
 			end
 		end
 	end
-	return result
-end
-function bInstance:get(properties)
-	for _, instance in pairs(getinstances()) do
-		local score = 0
-		for property, value in pairs(properties) do
-			if instance[property] == value then
-				score += 1
-			end
-		end
-		if score == #properties then
-			return instance
-		end
+	function Inst:SetProperty(property_string, value_any)
+		pcall(function()
+			self._instance[property_string] = value_any
+		end, property_string, value_any)
 	end
+	Inst.Name = Inst._instance.Name
+	return setmetatable(Inst, self)
 end
-return bInstance
+
+return instance
