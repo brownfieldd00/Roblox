@@ -16,6 +16,7 @@
         "getinstances"
     ],
     "robloxLsp.diagnostics.disable": [
-        "undefined-global"
+        "undefined-global",
+        "duplicate-set-field"
     ]
 }

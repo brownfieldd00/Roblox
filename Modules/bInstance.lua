@@ -18,6 +18,7 @@ function instance.new(classname_string)
 		end
 	end
 	-- Custom Instance Methods
+	-- BasePart Methods
 	function Inst:Anchor()
 		pcall(function()
 			if self._instance.Anchored then
@@ -49,6 +50,18 @@ function instance.new(classname_string)
 			self._instance[property_string] = value_any
 		end, property_string, value_any)
 	end
+	-- GuiObjects Methods
+	function Inst:SetSize(size_udim2)
+		if size_udim2 and self._instance:IsA('GuiObject') then
+			self._instance.Size = size_udim2
+		end
+	end
+	function Inst:SetPosition(position_udim2)
+		if position_udim2 and self._instance:IsA('GuiObject') then
+			self._instance.Size = position_udim2
+		end
+	end
+	
 	Inst.Name = Inst._instance.Name
 	return setmetatable(Inst, self)
 end
