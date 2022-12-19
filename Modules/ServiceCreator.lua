@@ -4,7 +4,7 @@ local mt = getmetatable(proxy)
 
 local CreatedServices = {_services={}}
 function CreatedServices:add(service)
-    self._services[#self + 1] = service
+    self._services[#self._services + 1] = service
 end
 
 function Service:Create(name_string)
