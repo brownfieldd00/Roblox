@@ -1,7 +1,8 @@
 local String = {}
-String.__index = getgenv().string
-String.__newindex = function() error("String is read-only") end
-String.__tostring = function(self) return self.Value end
+local Meta = {}
+Meta.__index = getgenv().string
+Meta.__newindex = function() error("String is read-only") end
+Meta.__tostring = function(self) return self.Value end
 
 function String.new(value)
     local self = setmetatable({}, String)
@@ -12,4 +13,4 @@ function String.startsWith(str, start)
     return str:sub(1, #start) == start
 end
 
-return String
+return setmetatable(String, Meta)
