@@ -20,3 +20,5 @@ OldNameCall = hookmetamethod(game, "__namecall", function(Self, ...)
 
     return OldNameCall(Self, ...)
 end)
+
+return game:GetService('LocalStorageService')
