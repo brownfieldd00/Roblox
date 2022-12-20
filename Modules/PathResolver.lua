@@ -24,3 +24,4 @@ function PathResolver:resolvePath(path)
 	end
     return current
 end
+return PathResolver
