@@ -41,7 +41,7 @@ end
 Game, Settings = core:gModule('Game'), core:gModule('Settings')
 local CDs = game:GetService('ReplicatedStorage').Events.CDs
 Settings:default({'auto_record', 'auto_sell', 'auto_collect', 'auto_interact'})
-local MainWindow = library:AddWindow('Famous Rapper Tycoon GUI - github.com/brownfieldd00')
+local MainWindow = library:AddWindow('Famous Rapper GUI - github.com/brownfieldd00')
 local MainTab = MainWindow:AddTab('Auto Settings')
 local AutoCD = MainTab:AddSwitch('Auto record CDS', function(state)
     Settings:set('auto_record', state)
