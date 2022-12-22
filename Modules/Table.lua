@@ -38,4 +38,23 @@ function Table.forEach(input_table, callback_function)
 	end
 	return true
 end
+function Table.find(x, k)
+	local found = nil
+	if typeof(k) == 'string' then
+		for i, v in pairs(x) do
+			if i == k then
+				found = v
+				break
+			end
+		end
+	else
+		for i, v in pairs(x) do
+			if v == k then
+				found = i
+				break
+			end
+		end
+	end
+	return found
+end
 return Table
