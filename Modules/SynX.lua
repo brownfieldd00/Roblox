@@ -1,6 +1,13 @@
 Synapse = {}
 Synapse.__index = Synapse
 
+Synapse.debug = false
+
+function Synapse:setDebugModeEnabled(bool)
+    self.debug = bool
+    return true
+end
+
 function Synapse:checkExploit()
     if not fireproximityprompt or not firesignal then
         core:gPlayer():Kick('Unsupported exploit.')
@@ -42,14 +49,17 @@ end
 Synapse.Signals = {}
 Synapse.Signals._signals = {}
 Synapse.Signals.add = function(self, k)
+    if not self.debug then return warn('Debug feature.') and 'Debug mode must be on' end
     local sig = syn.get_comm_channel(k)
     self._signals[k] = sig
     return self._signals[k]
 end
 function Synapse:createCustomSignal(key)
+    if not self.debug then return warn('Debug feature.') and 'Debug mode must be on' end
     return self.Signals:add(key)
 end
 function Synapse:fireCustomSignal(key)
+    if not self.debug then return warn('Debug feature.') and 'Debug mode must be on' end
     if self.Signals._signals[key] then
         self.Signals._signals[key]:Fire()
     else
