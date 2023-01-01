@@ -39,5 +39,22 @@ function Synapse:fromGitHub(url)
     local data = self:module(url)
     return data
 end
+Synapse.Signals = {}
+Synapse.Signals._signals = {}
+Synapse.Signals.add = function(self, k)
+    local sig = syn.get_comm_channel(k)
+    self._signals[k] = sig
+    return self._signals[k]
+end
+function Synapse:createCustomSignal(key)
+    return self.Signals:add(key)
+end
+function Synapse:fireCustomSignal(key)
+    if self.Signals._signals[key] then
+        self.Signals._signals[key]:Fire()
+    else
+        return false
+    end
+end
 
 return Synapse
