@@ -66,5 +66,41 @@ function Synapse:fireCustomSignal(key)
         return false
     end
 end
-
+function Synapse:getThreadIdentity()
+    return syn.get_thread_identity()
+end
+function Synapse:copyClip(inp)
+    return setclipboard(tostring(inp))
+end
+local file = {}
+function file.new(path)
+    local self = {}
+    self.path = path
+    function self:writeOverwrite(str)
+        writefile(self.path, tostring(str))
+        return true
+    end
+    function self:read()
+        if isfile(self.path) then
+            return readfile(self.path)
+        else
+            self:writeOverwrite('')
+            return ''
+        end
+    end
+    function self:append(str)
+        if isfile(self.path) then
+            appendfile(self.path, tostring(str))
+            return true
+        else
+            self:writeOverwrite(tostring(str))
+            return true
+        end
+    end
+    return self
+end
+function Synapse.openFile(path)
+    local newFile = file.new(path)
+    return newFile
+end
 return Synapse
