@@ -22,5 +22,5 @@ end
 
 getSpells()
 task.wait(2)
-syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/brownfieldd00/Roblox/main/Games/WoS%20Auto%20Farm.lua"))()')
+syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/brownfieldd00/Roblox/main/Games/WoS%20Auto%20Farm%20V1.lua"))()')
 game:GetService('TeleportService'):Teleport(game.PlaceId, Player)
