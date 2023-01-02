@@ -10,9 +10,9 @@ local function getSpells()
         if v:IsA('MeshPart') and v:FindFirstChild('ProximityPrompt') and v.ProximityPrompt:FindFirstChild('SpellbookScript') then
             task.wait()
             lp.CFrame = v.CFrame
-            task.wait(.5)
+            task.wait(.6)
             fireproximityprompt(v.ProximityPrompt, 7)
-            task.wait(.2)
+            task.wait(1)
         end
     end
     lp.CFrame = ori
