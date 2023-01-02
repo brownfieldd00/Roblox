@@ -5,7 +5,6 @@ firesignal(Player.PlayerGui.MainMenu.MainMenuFrame.ButtonsFrame.EnterGame.MouseB
 task.wait(2)
 local function getSpells()
     local lp = Player.Character.HumanoidRootPart
-    local spellBooks = {}
     local ori = lp.CFrame
     for i, v in next, workspace:GetDescendants() do
         if v:IsA('MeshPart') and v:FindFirstChild('ProximityPrompt') and v.ProximityPrompt:FindFirstChild('SpellbookScript') then
@@ -23,5 +22,5 @@ end
 
 getSpells()
 task.wait(2)
-syn.queue_on_teleport('loadstring(game:HttpGet(""))()')
+syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/brownfieldd00/Roblox/main/Games/WoS%20Auto%20Farm.lua"))()')
 game:GetService('TeleportService'):Teleport(game.PlaceId, Player)
